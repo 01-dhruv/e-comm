@@ -1,0 +1,41 @@
+form {
+    margin: 0 auto;
+    width: 90vw;
+    max-width: 20em;
+  }
+  .button {
+    background-color: #432ff8;
+    color: #fff;
+    display: block;
+    margin-top: 20px;
+    padding: 5px 5px;
+  }
+  
+  
+  input {
+    border: 1px solid;
+    padding: 0.3em;
+    width: 100%;
+  }
+  
+  textarea {
+    width: 100%;
+    min-height: 6em;
+  }
+  
+  label {
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+  
+  select {
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 0.3em;
+  }
+  
+  .postal-code {
+    width: 50%;
+  }
+  
