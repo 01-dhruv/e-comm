@@ -89,6 +89,28 @@ import { Link } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../../firebase'; // Import your Firebase authentication instance
 
+
+const navigations = [
+  {
+    name: 'Home',
+    path: '/'
+  },
+  {
+    name: 'Categories',
+    path: '/categories'
+  },  
+  {
+    name: 'About',
+    path: '/about'
+  },
+  {
+    name: 'Contact',
+    path: '/contact'
+  },
+
+]
+
+
 const Header = () => {
   const [user, setUser] = useState(null);
 
@@ -126,11 +148,24 @@ const Header = () => {
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
-          <span className="ml-3 text-xl">Ecom</span>
+          <span className="ml-3 text-xl">UrbaneMart</span>
         </Link>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
           {/* Navigation links */}
           {/* ... */}
+
+
+    <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+        {
+          navigations.map((navigation) =>{
+            return (
+              <Link to={navigation.path} className='mr-5 hover:text-gray-900'>{navigation.name}</Link>
+            )
+          })
+        }
+    </nav>
+
+
         </nav>
         <div className="flex items-center">
           {user ? (

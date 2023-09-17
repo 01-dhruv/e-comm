@@ -37,7 +37,7 @@ function App() {
       <Header userName={userName}/>
       <Routes>
         <Route path='/' Component={Home}/>
-        <Route path='/products' Component={Products}/>
+        <Route path='/categories' Component={Products}/>
         <Route path='/products/:id' Component={Product}/>
         <Route path='/categories/:name' Component={CategoryProducts}/>
         <Route path='/cart' Component={Cart}/>
