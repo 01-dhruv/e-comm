@@ -2,44 +2,154 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Cart = () => {
-  const navigate = useNavigate()
-  const [total, setTotal] = useState(0)
-  const carts = JSON.parse(localStorage.getItem('cart')) || []
+
+
+
+  // const navigate = useNavigate();
+
+  // // Memoize the carts variable to prevent unnecessary re-renders
+  // const carts = useMemo(() => JSON.parse(localStorage.getItem('cart')) || [], []);
+
+  // const [total, setTotal] = useState(0);
+
+  // useEffect(() => {
+  //   const total = carts.reduce((acc, item) => {
+  //     return acc + item.price * item.quantity;
+  //   }, 0);
+  //   setTotal(total);
+  // }, [carts]);
+
+  // const handleInc = (id) => {
+  //   const updatedCart = carts.map((item) => {
+  //     if (item.id === id) {
+  //       return {
+  //         ...item,
+  //         quantity: item.quantity + 1,
+  //       };
+  //     }
+  //     return item;
+  //   });
+  //   localStorage.setItem('cart', JSON.stringify(updatedCart));
+  //   navigate('/cart');
+  // };
+
+  // const handleDec = (id) => {
+  //   const updatedCart = carts.map((item) => {
+  //     if (item.id === id) {
+  //       return {
+  //         ...item,
+  //         quantity: item.quantity - 1,
+  //       };
+  //     }
+  //     return item;
+  //   });
+  //   localStorage.setItem('cart', JSON.stringify(updatedCart));
+  //   navigate('/cart');
+  // };
+
+  // const removeProduct = (id) => {
+  //   const updatedCart = carts.filter((item) => item.id !== id);
+  //   localStorage.setItem('cart', JSON.stringify(updatedCart));
+  //   navigate('/cart');
+  // };
+
+  // if (carts.length === 0) {
+  //   return (
+  //     <div className=" h-[55vh] flex justify-center items-center text-4xl ">
+  //       Cart is Empty
+  //     </div>
+  //   );
+  // }
+
+
+
+
+
+
+
+
+
+
+
+  // const navigate = useNavigate()
+  // const [total, setTotal] = useState(0)
+  // const carts = JSON.parse(localStorage.getItem('cart')) || []
+
+  // useEffect(() => {
+  //   const total = carts.reduce((acc, item) => {
+  //     return acc + (item.price * item.quantity)
+  //   }, 0)
+  //   setTotal(total)
+  // }, [carts])
+
+  const navigate = useNavigate();
+  const [total, setTotal] = useState(0);
+  const [carts, setCarts] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+
+  // const cartsRef = useRef(JSON.parse(localStorage.getItem('cart')) || []);
+  // const carts = cartsRef.current;
 
   useEffect(() => {
-    const total = carts.reduce((acc, item) => {
-      return acc + (item.price * item.quantity)
-    }, 0)
-    setTotal(total)
-  }, [carts])
+    const updatedTotal = carts.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setTotal(updatedTotal);
+  }, [carts]);
 
   const handleInc = (id) => {
     const updatedCart = carts.map(item => {
-      if(item.id === id) {
+      if (item.id === id) {
         return {
           ...item,
           quantity: item.quantity + 1
-        }
+        };
       }
-      return item
-    })
-    localStorage.setItem('cart', JSON.stringify(updatedCart))
-    navigate('/cart')
-  }
+      return item;
+    });
+    setCarts(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
 
   const handleDec = (id) => {
     const updatedCart = carts.map(item => {
-      if(item.id === id) {
+      if (item.id === id) {
         return {
           ...item,
-          quantity: item.quantity - 1
-        }
+          quantity: Math.max(item.quantity - 1, 0)  // Ensure quantity is non-negative
+        };
       }
-      return item
-    })
-    localStorage.setItem('cart', JSON.stringify(updatedCart))
-    navigate('/cart')
-  }
+      return item;
+    });
+    setCarts(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+
+  // const handleInc = (id) => {
+  //   const updatedCart = carts.map(item => {
+  //     if(item.id === id) {
+  //       return {
+  //         ...item,
+  //         quantity: item.quantity + 1
+  //       }
+  //     }
+  //     return item
+  //   })
+  //   localStorage.setItem('cart', JSON.stringify(updatedCart))
+  //   navigate('/cart')
+  // }
+
+  // const handleDec = (id) => {
+  //   const updatedCart = carts.map(item => {
+  //     if(item.id === id) {
+  //       return {
+  //         ...item,
+  //         quantity: item.quantity - 1
+  //       }
+  //     }
+  //     return item
+  //   })
+  //   localStorage.setItem('cart', JSON.stringify(updatedCart))
+  //   navigate('/cart')
+  // }
 
   const removeProduct = (id) => {
     const updatedCart = carts.filter(item => item.id !== id)
